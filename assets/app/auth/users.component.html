@@ -1,0 +1,18 @@
+<div class="col-md-8 col-md-offset-2">
+    <ul class="commentList" >
+        <li *ngFor="let user of users">
+            <div ng-model="user"  *ngIf="!isCurrentUser(user)" > 
+                {{user.firstName}}
+                {{user.lastName}}
+                {{user.email}}
+                <div *ngIf="isFriend(user)">
+                    <a (click)="onUnFollow(user)">Unfollow</a>
+                </div>
+                <div *ngIf="!isFriend(user)">
+                    <a (click)="onFollow(user)">Follow</a>
+                </div>
+         
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MessagesComponent } from "./messages.component";
 import { MessageListComponent } from "./message-list.component";
@@ -17,7 +17,8 @@ import { MessageService } from "./message.service";
     ],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [MessageService]
 })

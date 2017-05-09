@@ -1,13 +1,12 @@
+import { Comment } from './comment.model';
 export class Message {
-    content: string;
-    username: string;
-    messageId?: string;
-    userId?: string;
-
-    constructor(content: string, username: string, messageId?: string, userId?: string) {
-        this.content = content;
-        this.username = username;
-        this.messageId = messageId;
-        this.userId = userId;
-    }
+    
+    constructor(public content: string, 
+                public create_date: number,
+                public username?: string, 
+                public messageId?: string, 
+                public userId?: string, 
+                public likes?: number,
+                public comments?: Comment[]) 
+                {}
 }

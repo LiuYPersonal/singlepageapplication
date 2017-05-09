@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { SigninComponent } from "./signin.component";
 import { SignupComponent } from "./signup.component";
-import { LogoutComponent } from "./logout.component";
+import { UserComponent } from "./users.component";
 import { ProfileComponent } from './profile.component';
 import { authRouting } from "./auth.routing";
 
@@ -13,13 +13,13 @@ import { authRouting } from "./auth.routing";
         SigninComponent,
         SignupComponent,
         ProfileComponent,
-        LogoutComponent
+        UserComponent
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        authRouting
+        authRouting,
     ]
 })
 export class AuthModule {

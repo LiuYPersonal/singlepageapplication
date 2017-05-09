@@ -6,8 +6,11 @@ var schema = new Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     password: {type: String, required: true},
+    time: {type: Date, required: true},
     email: {type: String, required: true, unique: true},
-    messages: [{type: Schema.Types.ObjectId, ref: 'Message'}]
+    messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
+    following: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    followed: [{type: Schema.Types.ObjectId, ref: 'User'}],
 });
 
 schema.plugin(mongooseUniqueValidator);

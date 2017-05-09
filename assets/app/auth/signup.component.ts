@@ -18,14 +18,15 @@ export class SignupComponent implements OnInit {
             this.myForm.value.email,
             this.myForm.value.password,
             this.myForm.value.firstName,
-            this.myForm.value.lastName
+            this.myForm.value.lastName,
+            Date.now()
         );
         this.authService.signup(user)
             .subscribe(
                 data => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
-                    this.router.navigateByUrl('/');
+                    this.router.navigateByUrl('/messages');
                 },
                 error => console.error(error),
             );

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-
+import { Router } from '@angular/router';
 import { MessageService } from "./message.service";
 import { Message } from "./message.model";
 
@@ -10,8 +10,8 @@ import { Message } from "./message.model";
 })
 export class MessageInputComponent implements OnInit {
     message: Message;
-
-    constructor(private messageService: MessageService) {}
+    
+    constructor(private messageService: MessageService, private router: Router) {}
 
     onSubmit(form: NgForm) {
         if (this.message) {
@@ -19,18 +19,18 @@ export class MessageInputComponent implements OnInit {
             this.message.content = form.value.content;
             this.messageService.updateMessage(this.message)
                 .subscribe(
-                    result => console.log(result)
+                    result => console.log(result),
                 );
             this.message = null;
         } else {
             // Create
-            const message = new Message(form.value.content, 'Max');
+            const message = new Message(form.value.content, Date.now());
             this.messageService.addMessage(message)
                 .subscribe(
-                    data => console.log(data),
-                    // error => console.error(error)
+                    result => console.log(result)
                 );
         }
+        this.router.navigateByUrl('/');
         form.resetForm();
     }
 

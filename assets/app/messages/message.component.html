@@ -6,9 +6,32 @@
         <div class="author">
             {{ message.username }}
         </div>
+        <div class="likes">
+            {{ message.likes }}
+            <a (click)="onLike()">Likes</a>
+        </div>
         <div class="config" *ngIf="belongsToUser()">
             <a (click)="onEdit()">Edit</a>
             <a (click)="onDelete()">Delete</a>
         </div>
     </footer>
 </article>
+<div class="detailBox">
+    <div class="actionBox">
+        <ul class="commentList">
+                <li *ngFor="let comment of message.comments">
+                    {{comment.username}}: <div class="commentText"> {{comment.content}} </div>
+                    {{comment.date}}
+                </li>
+        </ul>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="form-group">
+                <input class="form-control" 
+                       type="text" 
+                       name="comment"
+                       placeholder="Your comments" ngModel>
+            </div>
+            <button class="btn btn-default" type="submit">Add</button>
+        </form>
+    </div>
+</div>

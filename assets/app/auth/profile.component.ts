@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit{
             .subscribe(
                 (user: User) => {
                     this.user=user
+                    
                 },
                 error => console.error(error)
             );
