@@ -2,6 +2,11 @@
 
 This project is a AngularJS+Node.js web application.
 
-It suppports features like: user signup, signin, logout, profile modification, message posting and editing.
+features:
+  - post/edit/delete messages
+  - add comment
+  - signin/signup
+  - edit profile
+  - follow/unfollow other users
 
 The seed project comes from udemy.com.
