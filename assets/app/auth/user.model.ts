@@ -5,6 +5,9 @@ export class User {
                 public password: string,
                 public firstName?: string,
                 public lastName?: string,
+                public sex?:boolean,
+                public age?:number,
+                public interests?:string[],
                 public create_date?: number,
                 public following?: Follow[],
                 public followed?: Follow[]

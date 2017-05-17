@@ -8,7 +8,7 @@ import { ErrorService } from "../errors/error.service";
 
 @Injectable()
 export class MessageService {
-//    private messages: Message[] = [];
+    private messages: Message[] = [];
     messageIsEdit = new EventEmitter<Message>();
 
     constructor(private http: Http, private errorService: ErrorService) {
@@ -27,6 +27,16 @@ export class MessageService {
                 return Observable.throw(error.json());
             });
     }
+    searchMessage(content: string){
+        let searchMessages: Message[] = [];
+        for (let message of this.messages){
+            if(message.content.match(content)){
+                searchMessages.push(message);
+            }
+        }
+        return searchMessages;
+    }
+
 
     getMessages() {
         const headers = new Headers({'Content-Type': 'application/json'});
@@ -57,6 +67,7 @@ export class MessageService {
                         mycomment)
                     );                  
                 }
+                this.messages=transformedMessages;
                 return transformedMessages;
             })
             .catch((error: Response) => {
@@ -67,6 +78,29 @@ export class MessageService {
 
     editMessage(message: Message) {
         this.messageIsEdit.emit(message);
+    }
+
+    shareLinkedin(message: Message){
+        var text = { 
+            "comment": message.comments[0],
+            "content": {
+                "title": "Share from minitwitter",
+                "description": message.content,
+                "submitted-url": "https://localhost:3000",  
+                "submitted-image-url": "https://example.com/logo.png"
+            },
+            "visibility": {
+                "code": "anyone"
+            }};   
+        const body = JSON.stringify(text);
+        console.log(body);  
+        const headers = new Headers({'Content-Type': 'application/json', 'x-li-format': 'json'});
+        return this.http.post("https://api.linkedin.com/v1/people/~/shares?format=json", body, {headers: headers})
+            .map((response: Response) => response.json())
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
     }
 
     updateMessage(message: Message) {
@@ -99,7 +133,7 @@ export class MessageService {
     }
 
     deleteMessage(message: Message) {
-  //      this.messages.splice(this.messages.indexOf(message), 1);
+        this.messages.splice(this.messages.indexOf(message), 1);
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';

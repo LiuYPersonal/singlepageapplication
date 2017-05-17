@@ -1,14 +1,14 @@
 <div class="col-md-8 col-md-offset-2">
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
-            <label for="content">Content</label>
-            <input
-                    type="text"
+            <label for="content">Create new posts</label>
+            <textarea
                     id="content"
+                    rows=3
                     class="form-control"
                     [ngModel]="message?.content"
                     name="content"
-                    required>
+                    required></textarea>
         </div>
         <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
         <button class="btn btn-primary" type="submit">Save</button>

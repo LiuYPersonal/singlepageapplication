@@ -1,6 +1,22 @@
 <div class="col-md-8 col-md-offset-2">
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
+            <label for="email">Mail</label>
+            <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    formControlName="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    formControlName="password">
+        </div>
+        <div class="form-group">
             <label for="firstName">First Name</label>
             <input
                     type="text"
@@ -17,20 +33,43 @@
                     formControlName="lastName">
         </div>
         <div class="form-group">
-            <label for="email">Mail</label>
-            <input
-                    type="email"
-                    id="email"
+            <label for="sex">Sex</label>
+            <label class="radio-inline">
+                <input 
+                    type="radio" 
+                    id="sex"
                     class="form-control"
-                    formControlName="email">
+                    formControlName="sex"
+                    value=true
+                    checked>Male</label>
+            <label class="radio-inline">
+                <input 
+                    type="radio" 
+                    id="sex"
+                    class="form-control"
+                    value=false
+                    formControlName="sex">Female</label>
+                    
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input
-                    type="password"
-                    id="password"
-                    class="form-control"
-                    formControlName="password">
+            <label for="age">Age</label>
+            <select class="form-control" formControlName="age" id="age">
+                    <option value=0> <10 </option>
+                    <option value=1>11~20</option>
+                    <option value=2>21~30</option>
+                    <option value=3>31~40</option>
+                    <option value=4> >41 </option>
+            </select>
+        </div>
+        <div class="form-group">
+                <label for="interests">Interests</label>
+                <select multiple class="form-control" formControlName="interests" id="interests">
+                    <option value="music">   Music </option>
+                    <option value="art">     Art</option>
+                    <option value="sport">   Sport</option>
+                    <option value="science"> Science</option>
+                    <option value="reading"> Reading </option>
+            </select>
         </div>
         <button
                 class="btn btn-primary"

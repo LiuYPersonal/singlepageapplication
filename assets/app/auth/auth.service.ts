@@ -8,7 +8,7 @@ import { ErrorService } from "../errors/error.service";
 
 @Injectable()
 export class AuthService {
-    
+    private users: Follow[];
     constructor(private http: Http, private errorService: ErrorService) {}
 
     getUsers() {
@@ -24,6 +24,7 @@ export class AuthService {
                         user.lastName
                     ));
                 }
+                this.users=transformedUsers;
                 return transformedUsers;
             })
             .catch((error: Response) => {
@@ -88,6 +89,9 @@ export class AuthService {
                     user.firstName,
                     user.lastName,
                     user.time,
+                    user.sex,
+                    user.age,
+                    user.interests,
                     myfollowing,
                     myfollowed
                 );
@@ -121,7 +125,15 @@ export class AuthService {
                 return Observable.throw(error.json());
             }); 
     }
-    
+    searchUser(content:string){
+        let searchResults: Follow[] = [];
+        for (let user of this.users){
+            if(user.email.match(content) || user.firstName.match(content) || user.lastName.match(content)){
+                searchResults.push(user);
+            }
+        }
+        return searchResults;
+    }
     followUser(user: Follow, follow: boolean){
         const body = JSON.stringify(user);
         const token = localStorage.getItem('token')

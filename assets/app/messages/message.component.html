@@ -13,8 +13,13 @@
         <div class="config" *ngIf="belongsToUser()">
             <a (click)="onEdit()">Edit</a>
             <a (click)="onDelete()">Delete</a>
+            <a class="twitter-share-button" (click)="onShare()">Tweet</a>
+            <a class="linkedin-share-button" (click)="onShareLinkedin()">Linkedin</a>
         </div>
     </footer>
+    <div>
+    
+    </div>
 </article>
 <div class="detailBox">
     <div class="actionBox">

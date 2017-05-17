@@ -1,18 +1,33 @@
 <div class="col-md-8 col-md-offset-2">
-    <ul class="commentList" >
-        <li *ngFor="let user of users">
-            <div ng-model="user"  *ngIf="!isCurrentUser(user)" > 
-                {{user.firstName}}
-                {{user.lastName}}
-                {{user.email}}
-                <div *ngIf="isFriend(user)">
-                    <a (click)="onUnFollow(user)">Unfollow</a>
-                </div>
-                <div *ngIf="!isFriend(user)">
-                    <a (click)="onFollow(user)">Follow</a>
-                </div>
-         
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group pull-right">
+            <input type="text" class="form-control" name="content" placeholder="What you looking for?" />
+            <input type="submit" class="form-control" style="visibility: hidden;" />
+        </div>
+    </form>
+    <span class="counter pull-right"></span>
+    <table class="table table-hover table-bordered results" id="userTable">
+        <thead>
+            <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>        
+            </tr>
+        </thead>
+        <tbody >
+            <div *ngFor="let user of users">
+                <tr ng-model="user" *ngIf="!isCurrentUser(user)">
+                        <td> {{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.email}}</td>  
+                        <td *ngIf="isFriend(user)">
+                            <a (click)="onUnFollow(user)">Unfollow</a>
+                        </td>
+                        <td *ngIf="!isFriend(user)">
+                            <a (click)="onFollow(user)">Follow</a>
+                        </td>             
+                </tr>
             </div>
-        </li>
-    </ul>
+        </tbody>
+    </table>
 </div>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from "./auth.service";
 import { Follow } from "./follow.model";
 import { User } from "./user.model";
-
+import { NgForm } from "@angular/forms";
 @Component({
     selector: 'app-user',
     templateUrl: './users.component.html'
@@ -27,6 +27,13 @@ export class UserComponent implements OnInit{
         }
         return false;
     }
+    
+    onSearch(form: NgForm) {
+        console.log(form.value.content);
+        this.users=this.authService.searchUser(form.value.content);
+        form.resetForm();
+    }
+
     onFollow(user: Follow){
         this.currentUser.following.push(user);
         this.authService.followUser(user, true)
@@ -43,6 +50,7 @@ export class UserComponent implements OnInit{
                 error => console.error(error)
             );       
     }
+
     ngOnInit() {
         this.authService.getUser()
             .subscribe(

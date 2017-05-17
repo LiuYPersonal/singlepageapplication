@@ -1,8 +1,10 @@
+import { Http, Response, Headers } from "@angular/http";
 import { Component, Input } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Message } from "./message.model";
 import { MessageService } from "./message.service";
 import { Comment } from "./comment.model";
+
 @Component({
     selector: 'app-message',
     templateUrl: './message.component.html',
@@ -24,7 +26,7 @@ import { Comment } from "./comment.model";
 export class MessageComponent {
     @Input() message: Message;
     
-    constructor(private messageService: MessageService) {}
+    constructor(private messageService: MessageService, private http: Http) {}
 
     onEdit() {
         this.messageService.editMessage(this.message);
@@ -42,6 +44,16 @@ export class MessageComponent {
         this.messageService.updateMessage(this.message);
     }
 
+    onShare(){
+            var url = "https://twitter.com/intent/tweet?text=" + this.message.content;
+            window.open(url, '_blank');
+    }
+    onShareLinkedin(){
+        this.messageService.shareLinkedin(this.message)
+            .subscribe(
+                result => console.log(result)
+            );
+    }
     onSubmit(form: NgForm) {
         var comment: Comment;
         comment = new Comment(form.value.comment, this.message.messageId, Date.now());

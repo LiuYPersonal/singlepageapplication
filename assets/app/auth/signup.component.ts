@@ -19,6 +19,9 @@ export class SignupComponent implements OnInit {
             this.myForm.value.password,
             this.myForm.value.firstName,
             this.myForm.value.lastName,
+            (this.myForm.value.sex=='true'),
+            Number(this.myForm.value.age),
+            this.myForm.value.interests,
             Date.now()
         );
         this.authService.signup(user)
@@ -41,7 +44,10 @@ export class SignupComponent implements OnInit {
                 Validators.required,
                 Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             ]),
-            password: new FormControl(null, Validators.required)
+            password: new FormControl(null, Validators.required),
+            sex: new FormControl(null, Validators.required),
+            age: new FormControl(null, Validators.required),
+            interests: new FormControl(null, Validators.required)
         });
     }
 }
